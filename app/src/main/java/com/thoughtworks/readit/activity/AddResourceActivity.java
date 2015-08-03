@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -50,8 +51,11 @@ public class AddResourceActivity extends Activity {
 
                 final JSONObject jsonObject = new JSONObject();
 
+                EditText resourceLink =   (EditText)findViewById(R.id.resourceLink);
+                EditText resourceTitle =   (EditText)findViewById(R.id.resourceTitle);
                 try {
-                    jsonObject.put("link", "google.com");
+                    jsonObject.put("link", resourceLink.getText());
+                    jsonObject.put("title", resourceTitle.getText());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -64,6 +68,7 @@ public class AddResourceActivity extends Activity {
 
                             @Override
                             public void onResponse(JSONObject response) {
+                                Toast.makeText(AddResourceActivity.this, "Successfully added!", Toast.LENGTH_LONG);
                                 Log.d(TAG, response.toString());
                                 pDialog.hide();
 
